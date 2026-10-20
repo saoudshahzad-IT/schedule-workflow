@@ -21,6 +21,9 @@ jobs:
         run: |
           echo "Scheduled task started"
           date -u
+          on:
+  schedule:
+    - cron: "0 4 * * *"
 
       - name: Run task script
         run: |
