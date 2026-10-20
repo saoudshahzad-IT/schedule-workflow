@@ -1,12 +1,28 @@
-name: schedule job
 
-on: 
-schedule:
- - cron: "0 0 * * *"
+name: Scheduled Task
 
- jobs:
- run-script:
- runs-on:ubuntu-latest
- steps:
- - name:Print Message
- run: echo :"schedule workflow execute"
+on:
+  schedule:
+    # Run every day at 09:00 UTC
+    - cron: "0 9 * * *"
+
+  # Allow manual execution from GitHub
+  workflow_dispatch:
+
+jobs:
+  scheduled-task:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Display execution time
+        run: |
+          echo "Scheduled task started"
+          date -u
+
+      - name: Run task script
+        run: |
+          echo "Execute your task here"
+          # Example: python scripts/task.py
